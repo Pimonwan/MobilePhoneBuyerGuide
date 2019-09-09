@@ -1,6 +1,5 @@
 package com.myapplication.view.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -23,12 +22,10 @@ class MobileDetailListAdapter : RecyclerView.Adapter<MobileDetailListViewHolder>
 
     override fun onBindViewHolder(holder: MobileDetailListViewHolder, index: Int) {
         val item = mDataArray[index]
-        Log.i("dddd", item.name)
         holder.bind(item)
     }
 
     fun addDataArray(data : List<MobileDetail>){
-        Log.i("dddd", data.toString())
         mDataArray = data
         this.notifyDataSetChanged()
     }

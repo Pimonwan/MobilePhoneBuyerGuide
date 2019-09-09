@@ -1,6 +1,5 @@
 package com.myapplication.data.repositry
 
-import android.util.Log
 import com.myapplication.data.domainInterface.MobileDetailDomain
 import com.myapplication.data.model.MobileDetailResponse
 import com.myapplication.data.remote.APIService
@@ -29,7 +28,6 @@ class MobileDetailRepositry {
 
             override fun onResponse(call: Call<List<MobileDetailResponse>>, response: Response<List<MobileDetailResponse>>) {
                 val result = response.body()!!
-                Log.i("iiii", result[0].name)
                 domain.mapMobileDetailData(result)
             }
         })

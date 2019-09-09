@@ -1,6 +1,5 @@
 package com.myapplication.presenter
 
-import android.util.Log
 import com.myapplication.domain.model.MobileDetail
 import com.myapplication.domain.presenterInterface.MobileDetailPresenter
 import com.myapplication.domain.usecase.MobileDetailUsecase
@@ -20,12 +19,10 @@ class TabMobileListPresenter : MobileDetailPresenter {
     }
 
     fun getMobileDatailList() {
-        Log.i("iiii", "presenter")
         usecase.callbackResponse()
     }
 
     override fun setDataToRecycleView(list: List<MobileDetail>) {
-       Log.i("setDataToRecycleView", list.toString())
         view.showMobileList(list)
     }
 }

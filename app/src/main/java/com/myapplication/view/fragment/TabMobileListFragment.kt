@@ -1,7 +1,6 @@
 package com.myapplication.view.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +29,6 @@ class TabMobileListFragment : Fragment() , MobileListView{
     }
 
     private fun getMobileList() {
-        Log.i("iiii", "tabMobileList")
         presenter.getMobileDatailList()
     }
 
@@ -51,7 +49,6 @@ class TabMobileListFragment : Fragment() , MobileListView{
     }
 
     override fun showMobileList(list: List<MobileDetail>) {
-        Log.i("iiii", list.toString())
         adapter.addDataArray(list)
     }
 }
