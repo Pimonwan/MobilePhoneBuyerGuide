@@ -1,31 +1,16 @@
 package com.myapplication.domain.usecase
 
-import com.myapplication.data.domainInterface.MobileDetailDomain
 import com.myapplication.data.model.MobileDetailResponse
 import com.myapplication.data.repositry.MobileDetailRepositry
-import com.myapplication.domain.mapper.MobileDetailMapper
-import com.myapplication.domain.presenterInterface.MobileDetailPresenter
+import io.reactivex.Observable
 
-class MobileDetailUsecase :  MobileDetailDomain {
+class MobileDetailUsecase {
 
-    lateinit var presenter : MobileDetailPresenter
-    val mobileDetailRepositry = MobileDetailRepositry()
-    val mapper = MobileDetailMapper()
+    private lateinit var mobileObservable : Observable<List<MobileDetailResponse>>
+    private val mobileDetailRepositry = MobileDetailRepositry()
 
-    init {
-        mobileDetailRepositry.initial(this)
+    fun callbackMobileDetailResponse() : Observable<List<MobileDetailResponse>> {
+        mobileObservable = mobileDetailRepositry.getMobileObservable()
+        return mobileObservable
     }
-
-    fun initial(presenter : MobileDetailPresenter) {
-        this.presenter = presenter
-    }
-    fun callbackResponse() {
-        mobileDetailRepositry.getMobileDetail()
-    }
-
-    override fun mapMobileDetailData(list: List<MobileDetailResponse>){
-        val mobileList = mapper.mapMobileDetail(list)
-        presenter.setDataToRecycleView(mobileList)
-    }
-
 }

@@ -1,7 +1,7 @@
 package com.myapplication.presenter.viewInterface
 
-import com.myapplication.domain.model.MobileDetail
+import com.myapplication.data.model.MobileDetailResponse
 
 interface MobileListView {
-    fun showMobileList(list : List<MobileDetail>)
+    fun showMobileList(list : List<MobileDetailResponse>)
 }

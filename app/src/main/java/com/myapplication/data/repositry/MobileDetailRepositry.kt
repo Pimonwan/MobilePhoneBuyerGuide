@@ -1,35 +1,18 @@
 package com.myapplication.data.repositry
 
-import com.myapplication.data.domainInterface.MobileDetailDomain
 import com.myapplication.data.model.MobileDetailResponse
 import com.myapplication.data.remote.APIService
 import com.myapplication.data.remote.RetrofitClass
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import io.reactivex.Observable
 
 class MobileDetailRepositry {
 
-    private lateinit var domain: MobileDetailDomain
     private lateinit var apiService: APIService
-    private lateinit var mobile : Call<List<MobileDetailResponse>>
+    private lateinit var mobileObservable : Observable<List<MobileDetailResponse>>
 
-    fun initial(domain : MobileDetailDomain) {
-        this.domain = domain
-    }
-
-
-    fun getMobileDetail(){
+    fun getMobileObservable() : Observable<List<MobileDetailResponse>>{
         apiService = RetrofitClass.getAPIService()
-        mobile = apiService.getMobileDetail()
-        mobile.enqueue(object : Callback<List<MobileDetailResponse>> {
-            override fun onFailure(call: Call<List<MobileDetailResponse>>, t: Throwable) {
-            }
-
-            override fun onResponse(call: Call<List<MobileDetailResponse>>, response: Response<List<MobileDetailResponse>>) {
-                val result = response.body()!!
-                domain.mapMobileDetailData(result)
-            }
-        })
+        mobileObservable = apiService.getMobileDetail2()
+        return mobileObservable
     }
 }

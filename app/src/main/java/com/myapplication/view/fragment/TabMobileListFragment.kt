@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.myapplication.R
-import com.myapplication.domain.model.MobileDetail
+import com.myapplication.data.model.MobileDetailResponse
 import com.myapplication.presenter.TabMobileListPresenter
 import com.myapplication.presenter.viewInterface.MobileListView
 import com.myapplication.view.adapter.MobileDetailListAdapter
@@ -36,19 +36,17 @@ class TabMobileListFragment : Fragment() , MobileListView{
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_tab_mobile_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initView()
         presenter.setView(this)
         getMobileList()
     }
 
-    override fun showMobileList(list: List<MobileDetail>) {
+    override fun showMobileList(list: List<MobileDetailResponse>) {
         adapter.addDataArray(list)
     }
 }
