@@ -1,7 +1,6 @@
 package com.myapplication.view.activity
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.myapplication.R
@@ -47,7 +46,6 @@ class MobileDetailActivity : AppCompatActivity(), MobileDetailView {
     }
 
     override fun setImagesToRecycleView(mobileImages : List<MobileImageResponse>) {
-        Log.i("ooooo", mobileImages.toString())
         adapter.addDataArray(mobileImages)
     }
 }

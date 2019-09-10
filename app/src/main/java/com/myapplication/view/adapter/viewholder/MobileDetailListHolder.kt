@@ -3,8 +3,9 @@ package com.myapplication.view.adapter.viewholder
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.myapplication.R
 import com.myapplication.presenter.displaymodel.MobileDetail
-import com.myapplication.view.adapter.MobileDetailListAdapter
+import com.myapplication.view.itemInterface.ItemListClick
 import kotlinx.android.synthetic.main.mobile_item_list.view.*
 
 class MobileDetailListHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -13,16 +14,32 @@ class MobileDetailListHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     private var price = itemView.price_text
     private var rate = itemView.rate_text
     private var mobileImage = itemView.mobile_image
+    private var favButt = itemView.favorite_button
 
-    fun bind(item: MobileDetail, listener: MobileDetailListAdapter.ItemListClick) {
+    fun bind(item: MobileDetail, listener: ItemListClick, favListener: ItemListClick.OnClickFavoriteButton) {
         brand.text = item.name
         description.text = item.description
         price.text = item.price
         rate.text = item.rating
+        Glide.with(itemView.context).load(item.thumbImageURL).into(mobileImage)
         itemView.setOnClickListener {
             listener.navigateToMobileDetailActivity(item)
         }
 
-        Glide.with(itemView.context).load(item.thumbImageURL).into(mobileImage)
+        if (item.isFavorite) {
+            favButt.setBackgroundResource(R.drawable.ic_favorite_black_24dp)
+        } else {
+            favButt.setBackgroundResource(R.drawable.ic_favorite_border_black_24dp)
+        }
+
+        favButt.setOnClickListener {
+            if (item.isFavorite) {
+                favButt.setBackgroundResource(R.drawable.ic_favorite_border_black_24dp)
+            } else {
+                favButt.setBackgroundResource(R.drawable.ic_favorite_black_24dp)
+            }
+            item.isFavorite = !item.isFavorite
+            favListener.addDataToFavoriteList(item)
+        }
     }
 }

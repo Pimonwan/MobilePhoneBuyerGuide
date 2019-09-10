@@ -12,25 +12,44 @@ import com.myapplication.R
 import com.myapplication.presenter.TabMobileListPresenter
 import com.myapplication.presenter.displaymodel.MobileDetail
 import com.myapplication.presenter.viewInterface.MobileListView
+import com.myapplication.view.activity.MainActivity
 import com.myapplication.view.activity.MobileDetailActivity
 import com.myapplication.view.adapter.MobileDetailListAdapter
+import com.myapplication.view.itemInterface.ItemListClick
 import kotlinx.android.synthetic.main.fragment_tab_mobile_list.*
 
 class TabMobileListFragment : Fragment() , MobileListView{
 
     private lateinit var presenter : TabMobileListPresenter
     private lateinit var adapter: MobileDetailListAdapter
+    private var favListener: ItemListClick.OnClickFavoriteButton? = null
 
-    private val mListener: MobileDetailListAdapter.ItemListClick = object : MobileDetailListAdapter.ItemListClick {
+    private val mListenerItemClick: ItemListClick = object : ItemListClick {
         override fun navigateToMobileDetailActivity(detail: MobileDetail) {
             navigateToMobileDetail(detail)
         }
     }
 
+    private val mListenerFavClickFavoriteButton: ItemListClick.OnClickFavoriteButton = object : ItemListClick.OnClickFavoriteButton {
+        override fun addDataToFavoriteList(detail: MobileDetail) {
+            addMobileDetailToFavoriteList(detail)
+        }
+    }
+
+    fun navigateToMobileDetail(detail: MobileDetail) {
+        val myIntent = Intent(context, MobileDetailActivity::class.java)
+        myIntent.putExtra("mobileDetail", detail)
+        startActivity(myIntent)
+    }
+
+    fun addMobileDetailToFavoriteList(data : MobileDetail){
+        favListener?.addDataToFavoriteList(data)
+    }
+
     private fun initView() {
         recyclerView?.let { recyclerView ->
             recyclerView.layoutManager = LinearLayoutManager(context)
-            recyclerView.adapter = MobileDetailListAdapter(mListener).also {
+            recyclerView.adapter = MobileDetailListAdapter(mListenerItemClick, mListenerFavClickFavoriteButton).also {
                 adapter = it
             }
         }
@@ -41,12 +60,12 @@ class TabMobileListFragment : Fragment() , MobileListView{
         presenter.getMobileDatailList()
     }
 
-    fun navigateToMobileDetail(detail: MobileDetail) {
-        val myIntent = Intent(context, MobileDetailActivity::class.java)
-        myIntent.putExtra("mobileDetail", detail)
-        startActivity(myIntent)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        if (activity is MainActivity) {
+            favListener = activity as ItemListClick.OnClickFavoriteButton
+        }
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,5 +89,4 @@ class TabMobileListFragment : Fragment() , MobileListView{
         val message = "something happend \n" + throwable.message.toString()
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
-
 }

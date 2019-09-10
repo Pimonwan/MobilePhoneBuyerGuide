@@ -6,17 +6,42 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.myapplication.R
+import com.myapplication.presenter.displaymodel.MobileDetail
+import com.myapplication.view.adapter.FavoriteListAdapter
+import kotlinx.android.synthetic.main.fragment_tab_favorite_mobile.*
 
 class TabFavoriteMobileFragment : Fragment() {
+
+    private var adapter: FavoriteListAdapter = FavoriteListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_tab_favorite_mobile, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView()
+    }
 
+    private fun initView() {
+        recyclerFavoriteView?.let { recyclerView ->
+            recyclerView.layoutManager = LinearLayoutManager(context)
+            recyclerView.adapter = FavoriteListAdapter().also {
+                adapter = it
+            }
+        }
+    }
+
+    fun manageFavoriteList(mobileDetail: MobileDetail) {
+        if (mobileDetail.isFavorite){
+            adapter.addItemToData(mobileDetail)
+        }else{
+            adapter.removeItemFromData(mobileDetail)
+        }
+    }
 }

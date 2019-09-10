@@ -4,10 +4,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayout
 import com.myapplication.R
+import com.myapplication.presenter.displaymodel.MobileDetail
 import com.myapplication.view.adapter.SectionsPagerAdapter
+import com.myapplication.view.fragment.TabFavoriteMobileFragment
+import com.myapplication.view.itemInterface.ItemListClick
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ItemListClick.OnClickFavoriteButton {
 
     private lateinit var sectionsPagerAdapter : SectionsPagerAdapter
 
@@ -30,5 +33,12 @@ class MainActivity : AppCompatActivity() {
 
         toolbar.title = getString(R.string.app_name)
         setSupportActionBar(toolbar)
+    }
+
+    override fun addDataToFavoriteList(detail: MobileDetail) {
+        val fragment = sectionsPagerAdapter.getItem(1)
+        if (fragment is TabFavoriteMobileFragment) {
+            fragment.manageFavoriteList(detail)
+        }
     }
 }

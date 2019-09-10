@@ -6,8 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.myapplication.R
 import com.myapplication.presenter.displaymodel.MobileDetail
 import com.myapplication.view.adapter.viewholder.MobileDetailListHolder
+import com.myapplication.view.itemInterface.ItemListClick
 
-class MobileDetailListAdapter(private val listener: ItemListClick) : RecyclerView.Adapter<MobileDetailListHolder>() {
+class MobileDetailListAdapter(private val itemListListener: ItemListClick, private val favButListener: ItemListClick.OnClickFavoriteButton) : RecyclerView.Adapter<MobileDetailListHolder>() {
 
     private var mDataArray: List<MobileDetail> = listOf()
 
@@ -22,15 +23,11 @@ class MobileDetailListAdapter(private val listener: ItemListClick) : RecyclerVie
 
     override fun onBindViewHolder(holder: MobileDetailListHolder, index: Int) {
         val item = mDataArray[index]
-        holder.bind(item, listener)
+        holder.bind(item, itemListListener, favButListener)
     }
 
     fun addDataArray(data : List<MobileDetail>){
         mDataArray = data
         this.notifyDataSetChanged()
-    }
-
-    interface ItemListClick {
-        fun navigateToMobileDetailActivity(detail: MobileDetail)
     }
 }
