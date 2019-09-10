@@ -7,7 +7,7 @@ import com.myapplication.presenter.displaymodel.MobileDetail
 import com.myapplication.view.adapter.MobileDetailListAdapter
 import kotlinx.android.synthetic.main.mobile_item_list.view.*
 
-class MobileDetailListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class MobileDetailListHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private var brand = itemView.brand_text
     private var description = itemView.description_text
     private var price = itemView.price_text

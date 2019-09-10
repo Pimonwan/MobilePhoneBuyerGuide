@@ -1,5 +1,6 @@
 package com.myapplication.view.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,10 +9,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.myapplication.R
-import com.myapplication.data.model.MobileDetailResponse
 import com.myapplication.presenter.TabMobileListPresenter
 import com.myapplication.presenter.displaymodel.MobileDetail
 import com.myapplication.presenter.viewInterface.MobileListView
+import com.myapplication.view.activity.MobileDetailActivity
 import com.myapplication.view.adapter.MobileDetailListAdapter
 import kotlinx.android.synthetic.main.fragment_tab_mobile_list.*
 
@@ -20,10 +21,16 @@ class TabMobileListFragment : Fragment() , MobileListView{
     private lateinit var presenter : TabMobileListPresenter
     private lateinit var adapter: MobileDetailListAdapter
 
+    private val mListener: MobileDetailListAdapter.ItemListClick = object : MobileDetailListAdapter.ItemListClick {
+        override fun navigateToMobileDetailActivity(detail: MobileDetail) {
+            navigateToMobileDetail(detail)
+        }
+    }
+
     private fun initView() {
         recyclerView?.let { recyclerView ->
             recyclerView.layoutManager = LinearLayoutManager(context)
-            recyclerView.adapter = MobileDetailListAdapter().also {
+            recyclerView.adapter = MobileDetailListAdapter(mListener).also {
                 adapter = it
             }
         }
@@ -33,6 +40,13 @@ class TabMobileListFragment : Fragment() , MobileListView{
     private fun getMobileList() {
         presenter.getMobileDatailList()
     }
+
+    fun navigateToMobileDetail(detail: MobileDetail) {
+        val myIntent = Intent(context, MobileDetailActivity::class.java)
+        myIntent.putExtra("mobileDetail", detail)
+        startActivity(myIntent)
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

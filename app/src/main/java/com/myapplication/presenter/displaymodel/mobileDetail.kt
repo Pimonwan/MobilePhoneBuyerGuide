@@ -1,5 +1,9 @@
 package com.myapplication.presenter.displaymodel
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class MobileDetail(
     val brand: String,
     val description: String,
@@ -8,4 +12,4 @@ data class MobileDetail(
     val price: String,
     val rating: String,
     val thumbImageURL: String
-)
+): Parcelable

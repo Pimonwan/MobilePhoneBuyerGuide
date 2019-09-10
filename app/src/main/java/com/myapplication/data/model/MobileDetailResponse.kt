@@ -1,7 +1,10 @@
 package com.myapplication.data.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class MobileDetailResponse(
     @SerializedName("brand")
     val brand: String,
@@ -17,4 +20,4 @@ data class MobileDetailResponse(
     val rating: Double,
     @SerializedName("thumbImageURL")
     val thumbImageURL: String
-)
+): Parcelable
