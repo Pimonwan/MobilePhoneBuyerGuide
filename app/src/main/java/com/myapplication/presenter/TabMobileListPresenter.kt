@@ -1,8 +1,8 @@
 package com.myapplication.presenter
 
-import android.util.Log
 import com.myapplication.data.model.MobileDetailResponse
 import com.myapplication.domain.usecase.MobileDetailUsecase
+import com.myapplication.presenter.mapper.MobileDetailDisplayMapper
 import com.myapplication.presenter.viewInterface.MobileListView
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -11,14 +11,13 @@ import io.reactivex.schedulers.Schedulers
 class TabMobileListPresenter {
 
     private lateinit var view : MobileListView
-    private var usecase = MobileDetailUsecase()
+    private var mobileDetailUsecase = MobileDetailUsecase()
+    private val mapper = MobileDetailDisplayMapper()
     private var mobileObservable: Observable<List<MobileDetailResponse>>
 
     init {
-        mobileObservable = usecase.callbackMobileDetailResponse()
-        mobileObservable.observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .subscribe({ list ->  setDataToRecycleView(list) }, { throwable -> Log.i("uuuu",throwable.message) } )
+        mobileObservable = mobileDetailUsecase.callbackMobileDetailResponse()
+        startObservation()
     }
 
     fun setView(view : MobileListView) {
@@ -26,10 +25,24 @@ class TabMobileListPresenter {
     }
 
     fun getMobileDatailList() {
-        usecase.callbackMobileDetailResponse()
+        mobileDetailUsecase.callbackMobileDetailResponse()
     }
 
-    private fun setDataToRecycleView(list: List<MobileDetailResponse>) {
-        view.showMobileList(list)
+    private fun startObservation() {
+        mobileObservable.observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe(
+                { list ->  onSuccessGettingData(list) },
+                { throwable ->  onFailGettingData(throwable)}
+            )
+    }
+
+    private fun onSuccessGettingData(list: List<MobileDetailResponse>) {
+        val displayList = mapper.mapperToDisplayModel(list)
+        view.showMobileList(displayList)
+    }
+
+    private fun onFailGettingData(throwable : Throwable) {
+        view.showErrorMessageToast(throwable)
     }
 }

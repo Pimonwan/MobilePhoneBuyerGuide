@@ -3,7 +3,7 @@ package com.myapplication.view.adapter.viewholder
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.myapplication.data.model.MobileDetailResponse
+import com.myapplication.presenter.displaymodel.MobileDetail
 import kotlinx.android.synthetic.main.mobile_item_list.view.*
 
 class MobileDetailListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -13,11 +13,11 @@ class MobileDetailListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemV
     private var rate = itemView.rate_text
     private var mobileImage = itemView.mobile_image
 
-    fun bind(item: MobileDetailResponse) {
+    fun bind(item: MobileDetail) {
         brand.text = item.name
         description.text = item.description
-        price.text = item.price.toString()
-        rate.text = item.rating.toString()
+        price.text = item.price
+        rate.text = item.rating
 
         Glide.with(itemView.context).load(item.thumbImageURL).into(mobileImage)
     }

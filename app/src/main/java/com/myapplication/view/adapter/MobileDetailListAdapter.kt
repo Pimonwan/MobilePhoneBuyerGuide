@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.myapplication.R
-import com.myapplication.data.model.MobileDetailResponse
+import com.myapplication.presenter.displaymodel.MobileDetail
 import com.myapplication.view.adapter.viewholder.MobileDetailListViewHolder
 
 class MobileDetailListAdapter : RecyclerView.Adapter<MobileDetailListViewHolder>() {
 
-    private var mDataArray: List<MobileDetailResponse> = listOf()
+    private var mDataArray: List<MobileDetail> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, index: Int): MobileDetailListViewHolder {
         val layout = LayoutInflater.from(parent.context).inflate(R.layout.mobile_item_list, parent, false)
@@ -25,7 +25,7 @@ class MobileDetailListAdapter : RecyclerView.Adapter<MobileDetailListViewHolder>
         holder.bind(item)
     }
 
-    fun addDataArray(data : List<MobileDetailResponse>){
+    fun addDataArray(data : List<MobileDetail>){
         mDataArray = data
         this.notifyDataSetChanged()
     }
