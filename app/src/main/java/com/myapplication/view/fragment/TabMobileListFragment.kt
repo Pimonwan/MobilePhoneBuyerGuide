@@ -15,7 +15,7 @@ import com.myapplication.presenter.viewInterface.MobileListView
 import com.myapplication.view.activity.MainActivity
 import com.myapplication.view.activity.MobileDetailActivity
 import com.myapplication.view.adapter.MobileDetailListAdapter
-import com.myapplication.view.itemInterface.ItemListClick
+import com.myapplication.view.viewInterface.ItemListClick
 import kotlinx.android.synthetic.main.fragment_tab_mobile_list.*
 
 class TabMobileListFragment : Fragment() , MobileListView{
@@ -44,6 +44,14 @@ class TabMobileListFragment : Fragment() , MobileListView{
 
     fun addMobileDetailToFavoriteList(data : MobileDetail){
         favListener?.addDataToFavoriteList(data)
+    }
+
+    fun setDataArray(list : List<MobileDetail>) {
+        adapter.addDataArray(list)
+    }
+
+    fun getMobileDetailList() : List<MobileDetail> {
+        return adapter.getMobileDetailList()
     }
 
     private fun initView() {

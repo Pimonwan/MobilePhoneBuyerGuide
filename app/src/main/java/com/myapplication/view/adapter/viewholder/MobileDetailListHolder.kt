@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.myapplication.R
 import com.myapplication.presenter.displaymodel.MobileDetail
-import com.myapplication.view.itemInterface.ItemListClick
+import com.myapplication.view.viewInterface.ItemListClick
 import kotlinx.android.synthetic.main.mobile_item_list.view.*
 
 class MobileDetailListHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

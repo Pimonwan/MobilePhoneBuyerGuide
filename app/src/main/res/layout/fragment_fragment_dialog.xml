@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    tools:context=".fragment.FragmentDialog">
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/sortChoicesButton"
+        android:paddingLeft="50dp"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+        <RadioButton android:id="@+id/choiceLowToHigh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price low to high"/>
+        <RadioButton android:id="@+id/choiceHighToLow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price high to low"/>
+        <RadioButton android:id="@+id/choiceRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rating 5 - 1"/>
+    </RadioGroup>
+
+</FrameLayout>

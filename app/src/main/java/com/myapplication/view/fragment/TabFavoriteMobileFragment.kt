@@ -44,4 +44,12 @@ class TabFavoriteMobileFragment : Fragment() {
             adapter.removeItemFromData(mobileDetail)
         }
     }
+
+    fun getFavoriteList() : List<MobileDetail> {
+        return adapter.getMobileList()
+    }
+
+    fun setDataArray(list: List<MobileDetail>) {
+        adapter.setDataArray(list)
+    }
 }

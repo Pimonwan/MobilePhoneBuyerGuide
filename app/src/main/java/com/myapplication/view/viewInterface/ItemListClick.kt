@@ -1,4 +1,4 @@
-package com.myapplication.view.itemInterface
+package com.myapplication.view.viewInterface
 
 import com.myapplication.presenter.displaymodel.MobileDetail
 

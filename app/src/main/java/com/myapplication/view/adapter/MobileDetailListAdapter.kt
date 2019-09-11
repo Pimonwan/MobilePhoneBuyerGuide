@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.myapplication.R
 import com.myapplication.presenter.displaymodel.MobileDetail
 import com.myapplication.view.adapter.viewholder.MobileDetailListHolder
-import com.myapplication.view.itemInterface.ItemListClick
+import com.myapplication.view.viewInterface.ItemListClick
 
 class MobileDetailListAdapter(private val itemListListener: ItemListClick, private val favButListener: ItemListClick.OnClickFavoriteButton) : RecyclerView.Adapter<MobileDetailListHolder>() {
 
@@ -30,4 +30,10 @@ class MobileDetailListAdapter(private val itemListListener: ItemListClick, priva
         mDataArray = data
         this.notifyDataSetChanged()
     }
+
+    fun getMobileDetailList() : List<MobileDetail> {
+        return this.mDataArray
+    }
+
+
 }

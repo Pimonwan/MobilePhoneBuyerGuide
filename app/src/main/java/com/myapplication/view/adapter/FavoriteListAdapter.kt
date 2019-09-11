@@ -31,6 +31,12 @@ class FavoriteListAdapter  : RecyclerView.Adapter<FavoriteListHolder>() {
         return this.mDataArray
     }
 
+    fun setDataArray(list: List<MobileDetail>) {
+        this.mDataArray.clear()
+        this.mDataArray.addAll(list)
+        this.notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, index: Int): FavoriteListHolder {
         val layout = LayoutInflater.from(parent.context).inflate(R.layout.favorite_item_list, parent, false)
         return FavoriteListHolder(layout)
