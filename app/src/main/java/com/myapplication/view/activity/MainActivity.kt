@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.tabs.TabLayout
@@ -19,26 +18,22 @@ import com.myapplication.view.fragment.TabMobileListFragment
 import com.myapplication.view.viewInterface.ItemListClick
 import com.myapplication.view.viewInterface.SortButtonInterface
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), MainActivityView, ItemListClick.OnClickFavoriteButton {
+class MainActivity : BaseActivity(), MainActivityView, ItemListClick.OnClickFavoriteButton {
 
+    @Inject
+    lateinit var presenter : MainActivityPresenter
     private val TAG = "0"
     private var fragmentTransaction : FragmentTransaction = supportFragmentManager.beginTransaction()
     private var bundle : Bundle = Bundle()
     private var priorInstance: Fragment? = supportFragmentManager.findFragmentByTag(TAG)
     private lateinit var sectionsPagerAdapter : SectionsPagerAdapter
-    private val presenter = MainActivityPresenter()
     private val mSortListener: SortButtonInterface = object : SortButtonInterface {
         override fun sortData(sortType: String) {
             presenter.sortMobileDetailList(sortType, getMobileDetailList())
             presenter.sortFavoriteList(sortType, getFavoriteList())
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        initView()
     }
 
     private fun initView(){
@@ -57,6 +52,41 @@ class MainActivity : AppCompatActivity(), MainActivityView, ItemListClick.OnClic
         setSupportActionBar(toolbar)
     }
 
+    private fun showFragmentChoices() {
+        val dialogFragment = FragmentDialog(mSortListener)
+        dialogFragment.arguments = bundle
+        fragmentTransaction = supportFragmentManager.beginTransaction()
+        if (priorInstance != null) {
+            fragmentTransaction.remove(priorInstance!!)
+        }
+        fragmentTransaction.addToBackStack(null)
+        dialogFragment.show(fragmentTransaction, TAG)
+    }
+
+    private fun getMobileDetailList() : List<MobileDetail>{
+        var data = listOf<MobileDetail>()
+        val fragment = sectionsPagerAdapter.getItem(0)
+        if (fragment is TabMobileListFragment) {
+            data = fragment.getMobileDetailList()
+        }
+        return data
+    }
+
+    private fun getFavoriteList() : List<MobileDetail>{
+        var data = listOf<MobileDetail>()
+        val fragment = sectionsPagerAdapter.getItem(1)
+        if (fragment is TabFavoriteMobileFragment) {
+            data = fragment.getFavoriteList()
+        }
+        return data
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        initView()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val mMenuInflater: MenuInflater = menuInflater
         mMenuInflater.inflate(R.menu.toolbar, menu)
@@ -71,36 +101,6 @@ class MainActivity : AppCompatActivity(), MainActivityView, ItemListClick.OnClic
         }
         return super.onOptionsItemSelected(item)
     }
-
-    private fun showFragmentChoices() {
-        val dialogFragment = FragmentDialog(mSortListener)
-        dialogFragment.arguments = bundle
-        fragmentTransaction = supportFragmentManager.beginTransaction()
-        if (priorInstance != null) {
-            fragmentTransaction.remove(priorInstance!!)
-        }
-        fragmentTransaction.addToBackStack(null)
-        dialogFragment.show(fragmentTransaction, TAG)
-    }
-
-    fun getMobileDetailList() : List<MobileDetail>{
-        var data = listOf<MobileDetail>()
-        val fragment = sectionsPagerAdapter.getItem(0)
-        if (fragment is TabMobileListFragment) {
-            data = fragment.getMobileDetailList()
-        }
-        return data
-    }
-
-    fun getFavoriteList() : List<MobileDetail>{
-        var data = listOf<MobileDetail>()
-        val fragment = sectionsPagerAdapter.getItem(1)
-        if (fragment is TabFavoriteMobileFragment) {
-            data = fragment.getFavoriteList()
-        }
-        return data
-    }
-
 
     override fun addDataToFavoriteList(detail: MobileDetail) {
         val fragment = sectionsPagerAdapter.getItem(1)

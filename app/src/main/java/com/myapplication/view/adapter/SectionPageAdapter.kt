@@ -11,9 +11,10 @@ import com.myapplication.R
 import com.myapplication.view.fragment.TabFavoriteMobileFragment
 import com.myapplication.view.fragment.TabMobileListFragment
 import kotlinx.android.synthetic.main.custom_tab_layout.view.*
+import javax.inject.Inject
 
 
-class SectionsPagerAdapter(private val context: Context, fm: FragmentManager, val intent: Intent) :
+class SectionsPagerAdapter @Inject constructor(private val context: Context, fm: FragmentManager, val intent: Intent) :
     FragmentPagerAdapter(fm) {
 
     private var tabMobileList = TabMobileListFragment()

@@ -1,5 +1,6 @@
 package com.myapplication.presenter
 
+import android.annotation.SuppressLint
 import com.myapplication.data.model.MobileDetailResponse
 import com.myapplication.domain.usecase.MobileDetailUsecase
 import com.myapplication.presenter.mapper.MobileDetailDisplayMapper
@@ -7,11 +8,11 @@ import com.myapplication.presenter.viewInterface.MobileListView
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class TabMobileListPresenter {
+class TabMobileListPresenter @Inject constructor(private var mobileDetailUsecase : MobileDetailUsecase){
 
     private lateinit var view : MobileListView
-    private var mobileDetailUsecase = MobileDetailUsecase()
     private val mapper = MobileDetailDisplayMapper()
     private var mobileObservable: Observable<List<MobileDetailResponse>>
 
@@ -28,6 +29,7 @@ class TabMobileListPresenter {
         mobileDetailUsecase.callbackMobileDetailResponse()
     }
 
+    @SuppressLint("CheckResult")
     private fun startObservation() {
         mobileObservable.observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())

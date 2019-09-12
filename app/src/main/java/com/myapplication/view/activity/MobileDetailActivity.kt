@@ -1,7 +1,6 @@
 package com.myapplication.view.activity
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.myapplication.R
 import com.myapplication.data.model.MobileImageResponse
@@ -10,11 +9,14 @@ import com.myapplication.presenter.displaymodel.MobileDetail
 import com.myapplication.presenter.viewInterface.MobileDetailView
 import com.myapplication.view.adapter.MobileImagesListAdapter
 import kotlinx.android.synthetic.main.activity_mobile_detail.*
+import javax.inject.Inject
 
-class MobileDetailActivity : AppCompatActivity(), MobileDetailView {
+class MobileDetailActivity : BaseActivity(), MobileDetailView {
 
     private lateinit var mobileDetail : MobileDetail
-    private lateinit var presenter : MobileDetailActivityPresenter
+
+    @Inject
+    lateinit var presenter : MobileDetailActivityPresenter
     private lateinit var adapter: MobileImagesListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +28,6 @@ class MobileDetailActivity : AppCompatActivity(), MobileDetailView {
 
     private fun initView() {
         mobileDetail = intent.getParcelableExtra("mobileDetail")
-        presenter = MobileDetailActivityPresenter()
         presenter.setView(this)
         presenter.getMobileImageById(mobileDetail.id)
 

@@ -2,8 +2,9 @@ package com.myapplication.presenter
 
 import com.myapplication.presenter.displaymodel.MobileDetail
 import com.myapplication.presenter.viewInterface.MainActivityView
+import javax.inject.Inject
 
-class MainActivityPresenter {
+class MainActivityPresenter @Inject constructor(){
 
     private lateinit var view : MainActivityView
 

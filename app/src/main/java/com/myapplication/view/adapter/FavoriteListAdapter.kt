@@ -11,7 +11,6 @@ class FavoriteListAdapter  : RecyclerView.Adapter<FavoriteListHolder>() {
 
     private var mDataArray: ArrayList<MobileDetail> = arrayListOf()
 
-
     fun addItemToData(data : MobileDetail) {
         mDataArray.add(data)
         this.notifyDataSetChanged()

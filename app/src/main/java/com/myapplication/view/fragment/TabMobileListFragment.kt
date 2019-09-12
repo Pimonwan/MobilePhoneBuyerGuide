@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.myapplication.R
 import com.myapplication.presenter.TabMobileListPresenter
@@ -17,10 +16,13 @@ import com.myapplication.view.activity.MobileDetailActivity
 import com.myapplication.view.adapter.MobileDetailListAdapter
 import com.myapplication.view.viewInterface.ItemListClick
 import kotlinx.android.synthetic.main.fragment_tab_mobile_list.*
+import javax.inject.Inject
 
-class TabMobileListFragment : Fragment() , MobileListView{
+class TabMobileListFragment : BaseFragment() , MobileListView{
 
-    private lateinit var presenter : TabMobileListPresenter
+    @Inject
+    lateinit var presenter : TabMobileListPresenter
+
     private lateinit var adapter: MobileDetailListAdapter
     private var favListener: ItemListClick.OnClickFavoriteButton? = null
 
@@ -61,7 +63,6 @@ class TabMobileListFragment : Fragment() , MobileListView{
                 adapter = it
             }
         }
-        presenter = TabMobileListPresenter()
     }
 
     private fun getMobileList() {
