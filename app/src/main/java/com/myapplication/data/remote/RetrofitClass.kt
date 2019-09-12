@@ -9,14 +9,14 @@ import javax.inject.Singleton
 @Singleton
 class RetrofitClass @Inject constructor() {
 
-    private val BASE_URL = "https://scb-test-mobile.herokuapp.com"
+    private val baseURL = "https://scb-test-mobile.herokuapp.com"
 
-        fun getAPIService() : APIService {
-            val retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-            return retrofit.create(APIService::class.java)
-        }
+    fun getAPIService(): APIService {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(baseURL)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        return retrofit.create(APIService::class.java)
+    }
 }

@@ -1,6 +1,7 @@
 package com.myapplication.view.activity
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.myapplication.R
 import com.myapplication.data.model.MobileImageResponse
@@ -13,26 +14,19 @@ import javax.inject.Inject
 
 class MobileDetailActivity : BaseActivity(), MobileDetailView {
 
-    private lateinit var mobileDetail : MobileDetail
-
     @Inject
-    lateinit var presenter : MobileDetailActivityPresenter
-    private lateinit var adapter: MobileImagesListAdapter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_mobile_detail)
-        initView()
-        setView()
-    }
+    lateinit var presenter: MobileDetailActivityPresenter
+    @Inject
+    lateinit var adapter: MobileImagesListAdapter
+    private lateinit var mobileDetail: MobileDetail
 
     private fun initView() {
         mobileDetail = intent.getParcelableExtra("mobileDetail")
         presenter.setView(this)
         presenter.getMobileImageById(mobileDetail.id)
-
         recyclerView?.let { recyclerView ->
-            recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL ,false)
+            recyclerView.layoutManager =
+                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
             recyclerView.adapter = MobileImagesListAdapter().also {
                 adapter = it
             }
@@ -46,7 +40,19 @@ class MobileDetailActivity : BaseActivity(), MobileDetailView {
         mobile_description.text = mobileDetail.description
     }
 
-    override fun setImagesToRecycleView(mobileImages : List<MobileImageResponse>) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_mobile_detail)
+        initView()
+        setView()
+    }
+
+    override fun setImagesToRecycleView(mobileImages: List<MobileImageResponse>) {
         adapter.addDataArray(mobileImages)
+    }
+
+    override fun showErrorMessageToast(throwable: Throwable) {
+        val message = "something happend \n" + throwable.message.toString()
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 }

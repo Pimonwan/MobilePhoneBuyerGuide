@@ -18,25 +18,23 @@ import com.myapplication.view.viewInterface.ItemListClick
 import kotlinx.android.synthetic.main.fragment_tab_mobile_list.*
 import javax.inject.Inject
 
-class TabMobileListFragment : BaseFragment() , MobileListView{
+class TabMobileListFragment : BaseFragment(), MobileListView {
 
     @Inject
-    lateinit var presenter : TabMobileListPresenter
-
+    lateinit var presenter: TabMobileListPresenter
     private lateinit var adapter: MobileDetailListAdapter
     private var favListener: ItemListClick.OnClickFavoriteButton? = null
-
     private val mListenerItemClick: ItemListClick = object : ItemListClick {
         override fun navigateToMobileDetailActivity(detail: MobileDetail) {
             navigateToMobileDetail(detail)
         }
     }
-
-    private val mListenerFavClickFavoriteButton: ItemListClick.OnClickFavoriteButton = object : ItemListClick.OnClickFavoriteButton {
-        override fun addDataToFavoriteList(detail: MobileDetail) {
-            addMobileDetailToFavoriteList(detail)
+    private val mListenerFavClickFavoriteButton: ItemListClick.OnClickFavoriteButton =
+        object : ItemListClick.OnClickFavoriteButton {
+            override fun addDataToFavoriteList(detail: MobileDetail) {
+                addMobileDetailToFavoriteList(detail)
+            }
         }
-    }
 
     fun navigateToMobileDetail(detail: MobileDetail) {
         val myIntent = Intent(context, MobileDetailActivity::class.java)
@@ -44,24 +42,25 @@ class TabMobileListFragment : BaseFragment() , MobileListView{
         startActivity(myIntent)
     }
 
-    fun addMobileDetailToFavoriteList(data : MobileDetail){
+    fun addMobileDetailToFavoriteList(data: MobileDetail) {
         favListener?.addDataToFavoriteList(data)
     }
 
-    fun setDataArray(list : List<MobileDetail>) {
+    fun setDataArray(list: List<MobileDetail>) {
         adapter.addDataArray(list)
     }
 
-    fun getMobileDetailList() : List<MobileDetail> {
+    fun getMobileDetailList(): List<MobileDetail> {
         return adapter.getMobileDetailList()
     }
 
     private fun initView() {
         recyclerView?.let { recyclerView ->
             recyclerView.layoutManager = LinearLayoutManager(context)
-            recyclerView.adapter = MobileDetailListAdapter(mListenerItemClick, mListenerFavClickFavoriteButton).also {
-                adapter = it
-            }
+            recyclerView.adapter =
+                MobileDetailListAdapter(mListenerItemClick, mListenerFavClickFavoriteButton).also {
+                    adapter = it
+                }
         }
     }
 

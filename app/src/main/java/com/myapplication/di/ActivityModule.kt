@@ -1,6 +1,7 @@
 package com.myapplication.di
 
 import com.myapplication.view.activity.MainActivity
+import com.myapplication.view.activity.MobileDetailActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -8,4 +9,7 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityModule {
     @ContributesAndroidInjector(modules = [FragmentModule::class])
     abstract fun contributeMainActivity(): MainActivity
+
+    @ContributesAndroidInjector
+    abstract fun contributeMobileDetailActivity(): MobileDetailActivity
 }

@@ -13,4 +13,4 @@ data class MobileDetail(
     val rating: String,
     val thumbImageURL: String,
     var isFavorite: Boolean = false
-): Parcelable
+) : Parcelable

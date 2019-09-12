@@ -9,20 +9,19 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class MobileDetailActivityPresenter @Inject constructor(private var mobileImageUsecase : MobileImageUsecase){
+class MobileDetailActivityPresenter @Inject constructor(private var mobileImageUsecase: MobileImageUsecase) {
 
     private lateinit var view: MobileDetailView
-    private lateinit var mobileImageObservable : Observable<List<MobileImageResponse>>
+    private lateinit var mobileImageObservable: Observable<List<MobileImageResponse>>
 
     fun setView(view: MobileDetailView) {
         this.view = view
     }
 
-    fun getMobileImageById(id : String) {
+    fun getMobileImageById(id: String) {
         mobileImageObservable = mobileImageUsecase.callbackMobileImageResponse(id)
         startObservation()
     }
-
 
     @SuppressLint("CheckResult")
     fun startObservation() {
@@ -38,7 +37,7 @@ class MobileDetailActivityPresenter @Inject constructor(private var mobileImageU
         view.setImagesToRecycleView(list)
     }
 
-    private fun onFailGettingData(throwable : Throwable) {
-
+    private fun onFailGettingData(throwable: Throwable) {
+        view.showErrorMessageToast(throwable)
     }
 }

@@ -23,12 +23,12 @@ import javax.inject.Inject
 class MainActivity : BaseActivity(), MainActivityView, ItemListClick.OnClickFavoriteButton {
 
     @Inject
-    lateinit var presenter : MainActivityPresenter
-    private val TAG = "0"
-    private var fragmentTransaction : FragmentTransaction = supportFragmentManager.beginTransaction()
-    private var bundle : Bundle = Bundle()
-    private var priorInstance: Fragment? = supportFragmentManager.findFragmentByTag(TAG)
-    private lateinit var sectionsPagerAdapter : SectionsPagerAdapter
+    lateinit var presenter: MainActivityPresenter
+    private val tag = "0"
+    private var fragmentTransaction: FragmentTransaction = supportFragmentManager.beginTransaction()
+    private var bundle: Bundle = Bundle()
+    private var priorInstance: Fragment? = supportFragmentManager.findFragmentByTag(tag)
+    private lateinit var sectionsPagerAdapter: SectionsPagerAdapter
     private val mSortListener: SortButtonInterface = object : SortButtonInterface {
         override fun sortData(sortType: String) {
             presenter.sortMobileDetailList(sortType, getMobileDetailList())
@@ -36,9 +36,9 @@ class MainActivity : BaseActivity(), MainActivityView, ItemListClick.OnClickFavo
         }
     }
 
-    private fun initView(){
+    private fun initView() {
         presenter.setView(this)
-        sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager, intent)
+        sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
         view_pager.adapter = sectionsPagerAdapter
 
         tabs.setupWithViewPager(view_pager)
@@ -60,10 +60,10 @@ class MainActivity : BaseActivity(), MainActivityView, ItemListClick.OnClickFavo
             fragmentTransaction.remove(priorInstance!!)
         }
         fragmentTransaction.addToBackStack(null)
-        dialogFragment.show(fragmentTransaction, TAG)
+        dialogFragment.show(fragmentTransaction, tag)
     }
 
-    private fun getMobileDetailList() : List<MobileDetail>{
+    private fun getMobileDetailList(): List<MobileDetail> {
         var data = listOf<MobileDetail>()
         val fragment = sectionsPagerAdapter.getItem(0)
         if (fragment is TabMobileListFragment) {
@@ -72,7 +72,7 @@ class MainActivity : BaseActivity(), MainActivityView, ItemListClick.OnClickFavo
         return data
     }
 
-    private fun getFavoriteList() : List<MobileDetail>{
+    private fun getFavoriteList(): List<MobileDetail> {
         var data = listOf<MobileDetail>()
         val fragment = sectionsPagerAdapter.getItem(1)
         if (fragment is TabFavoriteMobileFragment) {
@@ -122,5 +122,4 @@ class MainActivity : BaseActivity(), MainActivityView, ItemListClick.OnClickFavo
             favoriteMobileFragment.setDataArray(list)
         }
     }
-
 }

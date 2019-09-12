@@ -16,7 +16,11 @@ class MobileDetailListHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     private var mobileImage = itemView.mobile_image
     private var favButt = itemView.favorite_button
 
-    fun bind(item: MobileDetail, listener: ItemListClick, favListener: ItemListClick.OnClickFavoriteButton) {
+    fun bind(
+        item: MobileDetail,
+        listener: ItemListClick,
+        favListener: ItemListClick.OnClickFavoriteButton
+    ) {
         brand.text = item.name
         description.text = item.description
         price.text = item.price

@@ -8,8 +8,4 @@ interface ItemListClick {
     interface OnClickFavoriteButton {
         fun addDataToFavoriteList(detail: MobileDetail)
     }
-
-    interface OnClickUnFavoriteButton {
-        fun deleteDataFromFavoriteButton(detail: MobileDetail)
-    }
 }

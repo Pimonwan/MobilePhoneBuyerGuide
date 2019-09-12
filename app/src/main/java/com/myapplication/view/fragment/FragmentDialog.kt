@@ -1,6 +1,5 @@
 package com.myapplication.view.fragment
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,24 +10,12 @@ import com.myapplication.R
 import com.myapplication.view.viewInterface.SortButtonInterface
 import kotlinx.android.synthetic.main.fragment_fragment_dialog.*
 
-class FragmentDialog(listener : SortButtonInterface) :  DialogFragment(){
+class FragmentDialog(listener: SortButtonInterface) : DialogFragment() {
 
-    private val mRadioListener : SortButtonInterface = listener
+    private val mRadioListener: SortButtonInterface = listener
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_fragment_dialog, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setRadioButton()
-    }
-
-    private fun setRadioButton(){
-        sortChoicesButton.setOnCheckedChangeListener { _ , checkedId ->
+    private fun setRadioButton() {
+        sortChoicesButton.setOnCheckedChangeListener { _, checkedId ->
             val radioButton = view!!.findViewById<RadioButton>(checkedId)
             when {
                 radioButton.text.toString() == "Price low to high" -> {
@@ -45,6 +32,17 @@ class FragmentDialog(listener : SortButtonInterface) :  DialogFragment(){
                 }
             }
         }
+    }
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_fragment_dialog, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setRadioButton()
     }
 }

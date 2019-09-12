@@ -20,4 +20,4 @@ data class MobileDetailResponse(
     val rating: Double,
     @SerializedName("thumbImageURL")
     val thumbImageURL: String
-): Parcelable
+) : Parcelable

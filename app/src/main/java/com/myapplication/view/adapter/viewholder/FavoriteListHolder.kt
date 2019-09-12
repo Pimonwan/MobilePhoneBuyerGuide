@@ -13,7 +13,7 @@ class FavoriteListHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private var rateText = itemView.rate_text
     private var mobileImage = itemView.mobile_image
 
-    fun bind(item: MobileDetail){
+    fun bind(item: MobileDetail) {
         brandText.text = item.name
         descriptionText.text = item.description
         priceText.text = item.price

@@ -10,31 +10,12 @@ import com.myapplication.R
 import com.myapplication.presenter.displaymodel.MobileDetail
 import com.myapplication.view.adapter.FavoriteListAdapter
 import kotlinx.android.synthetic.main.fragment_tab_favorite_mobile.*
+import javax.inject.Inject
 
 class TabFavoriteMobileFragment  : BaseFragment() {
 
-    private var adapter: FavoriteListAdapter = FavoriteListAdapter()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_tab_favorite_mobile, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initView()
-    }
-
-    private fun initView() {
-        recyclerFavoriteView?.let { recyclerView ->
-            recyclerView.layoutManager = LinearLayoutManager(context)
-            recyclerView.adapter = FavoriteListAdapter().also {
-                adapter = it
-            }
-        }
-    }
+    @Inject
+    lateinit var adapter: FavoriteListAdapter
 
     fun manageFavoriteList(mobileDetail: MobileDetail) {
         if (mobileDetail.isFavorite){
@@ -50,5 +31,26 @@ class TabFavoriteMobileFragment  : BaseFragment() {
 
     fun setDataArray(list: List<MobileDetail>) {
         adapter.setDataArray(list)
+    }
+
+    private fun initView() {
+        recyclerFavoriteView?.let { recyclerView ->
+            recyclerView.layoutManager = LinearLayoutManager(context)
+            recyclerView.adapter = FavoriteListAdapter().also {
+                adapter = it
+            }
+        }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_tab_favorite_mobile, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView()
     }
 }

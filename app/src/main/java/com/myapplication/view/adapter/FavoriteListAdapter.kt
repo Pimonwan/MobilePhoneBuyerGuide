@@ -6,12 +6,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.myapplication.R
 import com.myapplication.presenter.displaymodel.MobileDetail
 import com.myapplication.view.adapter.viewholder.FavoriteListHolder
+import javax.inject.Inject
 
-class FavoriteListAdapter  : RecyclerView.Adapter<FavoriteListHolder>() {
+class FavoriteListAdapter @Inject constructor() : RecyclerView.Adapter<FavoriteListHolder>() {
 
     private var mDataArray: ArrayList<MobileDetail> = arrayListOf()
 
-    fun addItemToData(data : MobileDetail) {
+    fun addItemToData(data: MobileDetail) {
         mDataArray.add(data)
         this.notifyDataSetChanged()
     }
@@ -21,12 +22,7 @@ class FavoriteListAdapter  : RecyclerView.Adapter<FavoriteListHolder>() {
         this.notifyDataSetChanged()
     }
 
-    fun removeItemFromIndex(viewHolder: RecyclerView.ViewHolder) {
-        mDataArray.removeAt(viewHolder.adapterPosition)
-        this.notifyDataSetChanged()
-    }
-
-    fun getMobileList() : List<MobileDetail> {
+    fun getMobileList(): List<MobileDetail> {
         return this.mDataArray
     }
 
@@ -37,7 +33,8 @@ class FavoriteListAdapter  : RecyclerView.Adapter<FavoriteListHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, index: Int): FavoriteListHolder {
-        val layout = LayoutInflater.from(parent.context).inflate(R.layout.favorite_item_list, parent, false)
+        val layout =
+            LayoutInflater.from(parent.context).inflate(R.layout.favorite_item_list, parent, false)
         return FavoriteListHolder(layout)
     }
 
@@ -46,7 +43,7 @@ class FavoriteListAdapter  : RecyclerView.Adapter<FavoriteListHolder>() {
     }
 
     override fun onBindViewHolder(holder: FavoriteListHolder, index: Int) {
-        val item= mDataArray[index]
+        val item = mDataArray[index]
         holder.bind(item)
     }
 }

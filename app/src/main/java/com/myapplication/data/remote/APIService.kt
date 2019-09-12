@@ -8,9 +8,9 @@ import retrofit2.http.Path
 
 interface APIService {
     @GET("/api/mobiles/")
-    fun getMobileDetail2() : Observable<List<MobileDetailResponse>>
+    fun getMobileDetail2(): Observable<List<MobileDetailResponse>>
 
     @GET("/api/mobiles/{id}/images/")
-    fun getMobileImage(@Path("id") id : String): Observable<List<MobileImageResponse>>
+    fun getMobileImage(@Path("id") id: String): Observable<List<MobileImageResponse>>
 
 }

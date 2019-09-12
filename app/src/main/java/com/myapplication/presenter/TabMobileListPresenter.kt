@@ -5,23 +5,21 @@ import com.myapplication.data.model.MobileDetailResponse
 import com.myapplication.domain.usecase.MobileDetailUsecase
 import com.myapplication.presenter.mapper.MobileDetailDisplayMapper
 import com.myapplication.presenter.viewInterface.MobileListView
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class TabMobileListPresenter @Inject constructor(private var mobileDetailUsecase : MobileDetailUsecase){
+class TabMobileListPresenter @Inject constructor(private var mobileDetailUsecase: MobileDetailUsecase) {
 
-    private lateinit var view : MobileListView
+    private lateinit var view: MobileListView
     private val mapper = MobileDetailDisplayMapper()
-    private var mobileObservable: Observable<List<MobileDetailResponse>>
+    private var mobileObservable = mobileDetailUsecase.callbackMobileDetailResponse()
 
     init {
-        mobileObservable = mobileDetailUsecase.callbackMobileDetailResponse()
         startObservation()
     }
 
-    fun setView(view : MobileListView) {
+    fun setView(view: MobileListView) {
         this.view = view
     }
 
@@ -34,8 +32,8 @@ class TabMobileListPresenter @Inject constructor(private var mobileDetailUsecase
         mobileObservable.observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe(
-                { list ->  onSuccessGettingData(list) },
-                { throwable ->  onFailGettingData(throwable)}
+                { list -> onSuccessGettingData(list) },
+                { throwable -> onFailGettingData(throwable) }
             )
     }
 
@@ -44,7 +42,7 @@ class TabMobileListPresenter @Inject constructor(private var mobileDetailUsecase
         view.showMobileList(displayList)
     }
 
-    private fun onFailGettingData(throwable : Throwable) {
+    private fun onFailGettingData(throwable: Throwable) {
         view.showErrorMessageToast(throwable)
     }
 }
