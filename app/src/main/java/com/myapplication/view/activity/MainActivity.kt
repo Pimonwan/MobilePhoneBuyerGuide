@@ -19,6 +19,7 @@ import com.myapplication.view.fragment.TabMobileListFragment
 import com.myapplication.view.viewInterface.ItemListClick
 import com.myapplication.view.viewInterface.SortButtonInterface
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.ext.android.get
 
 class MainActivity : AppCompatActivity(), MainActivityView, ItemListClick.OnClickFavoriteButton {
 
@@ -26,8 +27,10 @@ class MainActivity : AppCompatActivity(), MainActivityView, ItemListClick.OnClic
     private var fragmentTransaction : FragmentTransaction = supportFragmentManager.beginTransaction()
     private var bundle : Bundle = Bundle()
     private var priorInstance: Fragment? = supportFragmentManager.findFragmentByTag(TAG)
+
     private lateinit var sectionsPagerAdapter : SectionsPagerAdapter
-    private val presenter = MainActivityPresenter()
+    private var presenter : MainActivityPresenter = get()
+
     private val mSortListener: SortButtonInterface = object : SortButtonInterface {
         override fun sortData(sortType: String) {
             presenter.sortMobileDetailList(sortType, getMobileDetailList())
