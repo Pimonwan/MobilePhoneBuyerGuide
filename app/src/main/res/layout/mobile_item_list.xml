@@ -34,7 +34,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_width="@dimen/fav_butt_width"
                     android:layout_height="@dimen/fav_butt_height"
-                    android:background="@drawable/ic_favorite_border_black_24dp"/>
+                    android:background="@drawable/ic_favorite_border_black"/>
                 <TextView
                     android:id="@+id/brand_text"
                     android:text="@string/mobile_brand"
