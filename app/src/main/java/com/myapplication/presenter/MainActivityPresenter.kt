@@ -1,5 +1,6 @@
 package com.myapplication.presenter
 
+import com.myapplication.DataString
 import com.myapplication.presenter.displaymodel.MobileDetail
 import com.myapplication.presenter.viewInterface.MainActivityView
 import javax.inject.Inject
@@ -27,10 +28,10 @@ class MainActivityPresenter @Inject constructor() {
     private fun sortMobileList(option: String, data: List<MobileDetail>): List<MobileDetail> {
         val list: List<MobileDetail>
         list = when (option) {
-            "Price low to high" -> {
+            DataString.optionPriceLowToHigh -> {
                 data.sortedBy { T -> T.price }
             }
-            "Price high to low" -> {
+            DataString.optionRateHighToLow -> {
                 val arrayPriceLowToHigh = data.sortedBy { T -> T.price }
                 arrayPriceLowToHigh.reversed()
             }

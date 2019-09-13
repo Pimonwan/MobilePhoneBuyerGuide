@@ -5,26 +5,25 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     tools:context=".fragment.FragmentDialog">
-
-    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    <RadioGroup
         android:id="@+id/sortChoicesButton"
-        android:paddingLeft="50dp"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
+        android:paddingStart="@dimen/padding_50"
+        android:paddingEnd="@dimen/padding_5"
+        android:layout_width="@dimen/padding_300"
+        android:layout_height="@dimen/padding_150"
         android:gravity="center_vertical"
         android:orientation="vertical">
         <RadioButton android:id="@+id/choiceLowToHigh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Price low to high"/>
+            android:text="@string/choice_low_to_high"/>
         <RadioButton android:id="@+id/choiceHighToLow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Price high to low"/>
+            android:text="@string/choice_high_to_low"/>
         <RadioButton android:id="@+id/choiceRate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rating 5 - 1"/>
+            android:text="@string/choice_rating"/>
     </RadioGroup>
-
 </FrameLayout>

@@ -7,11 +7,11 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="@dimen/padding_5"
         android:layout_gravity="center"
         card_view:cardBackgroundColor="#cdffffff"
-        card_view:cardCornerRadius="4dp"
-        card_view:cardElevation="2sp"
+        card_view:cardCornerRadius="@dimen/padding_4"
+        card_view:cardElevation="@dimen/padding_2"
         card_view:cardUseCompatPadding="true">
         <LinearLayout
             android:padding="@dimen/padding_20"
@@ -20,34 +20,35 @@
             <ImageView
                 android:id="@+id/mobile_image"
                 android:layout_width="@dimen/mobile_image_list_width"
-                android:layout_height="@dimen/mobile_image_list_height"/>
+                android:layout_height="@dimen/mobile_image_list_height"
+                android:contentDescription="@string/show_mobile_image" />
             <RelativeLayout
-                android:paddingLeft="@dimen/padding_20"
+                android:paddingStart="@dimen/padding_20"
+                android:paddingEnd="@dimen/padding_5"
                 android:id="@+id/linear"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
                 <Button
                     android:id="@+id/favorite_button"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_width="@dimen/fav_butt_width"
                     android:layout_height="@dimen/fav_butt_height"
                     android:background="@drawable/ic_favorite_border_black_24dp"/>
-
                 <TextView
                     android:id="@+id/brand_text"
-                    android:text="brand"
+                    android:text="@string/mobile_brand"
                     android:textStyle="bold"
                     android:textSize="@dimen/title_list"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    card_view:ignore="RelativeOverlap" />
                 <TextView
                     android:id="@+id/description_text"
                     android:ellipsize="end"
-                    android:maxLines="2"
+                    android:maxLines="@string/max_lines"
                     android:layout_below="@+id/brand_text"
-                    android:text="description"
+                    android:text="@string/mobile_description"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/description_text_height"/>
                 <RelativeLayout
@@ -57,15 +58,16 @@
                     android:orientation="horizontal">
                     <TextView
                         android:id="@+id/price_text"
-                        android:text="price"
+                        android:text="@string/mobile_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <TextView
                         android:id="@+id/rate_text"
-                        android:text="rate"
-                        android:layout_alignParentRight="true"
+                        android:text="@string/mobile_rate"
+                        android:layout_alignParentEnd="true"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        card_view:ignore="RelativeOverlap" />
                 </RelativeLayout>
             </RelativeLayout>
         </LinearLayout>

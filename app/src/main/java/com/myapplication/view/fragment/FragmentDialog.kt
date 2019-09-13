@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.fragment.app.DialogFragment
+import com.myapplication.DataString
 import com.myapplication.R
 import com.myapplication.view.viewInterface.SortButtonInterface
 import kotlinx.android.synthetic.main.fragment_fragment_dialog.*
@@ -18,16 +19,16 @@ class FragmentDialog(listener: SortButtonInterface) : DialogFragment() {
         sortChoicesButton.setOnCheckedChangeListener { _, checkedId ->
             val radioButton = view!!.findViewById<RadioButton>(checkedId)
             when {
-                radioButton.text.toString() == "Price low to high" -> {
-                    mRadioListener.sortData("Price low to high")
+                radioButton.text.toString() == DataString.optionPriceLowToHigh -> {
+                    mRadioListener.sortData(DataString.optionPriceLowToHigh)
                     this.dismiss()
                 }
-                radioButton.text.toString() == "Price high to low" -> {
-                    mRadioListener.sortData("Price high to low")
+                radioButton.text.toString() == DataString.optionPriceHighToLow -> {
+                    mRadioListener.sortData(DataString.optionPriceHighToLow)
                     this.dismiss()
                 }
                 else -> {
-                    mRadioListener.sortData("")
+                    mRadioListener.sortData(DataString.optionRateHighToLow)
                     this.dismiss()
                 }
             }

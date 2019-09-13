@@ -10,7 +10,6 @@
         android:id="@+id/appbar"
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/mobile_detail_page_toolbar"
             android:layout_width="match_parent"
@@ -19,7 +18,6 @@
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:titleTextColor="@android:color/white" />
     </com.google.android.material.appbar.AppBarLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         tools:listitem="@layout/mobile_image_item_list"
@@ -37,7 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:paddingRight="@dimen/padding_20"
+                android:paddingStart="@dimen/padding_5"
+                android:paddingEnd="@dimen/padding_20"
                 android:textSize="@dimen/titleText"
                 android:textStyle="bold"
                 android:id="@+id/mobile_name"
@@ -46,7 +45,7 @@
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/mobile_brand"
-                android:text="brand"
+                tools:text="brand"
                 android:textStyle="normal"
                 android:textSize="@dimen/subTitleText"
                 android:layout_width="wrap_content"
@@ -55,7 +54,7 @@
         <TextView
             android:paddingTop="@dimen/padding_20"
             android:id="@+id/mobile_description"
-            android:text="description"
+            tools:text="description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>

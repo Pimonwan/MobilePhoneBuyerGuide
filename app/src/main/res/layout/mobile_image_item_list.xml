@@ -8,5 +8,6 @@
         android:paddingTop="@dimen/padding_20"
         android:id="@+id/mobile_image"
         android:layout_width="@dimen/mobile_image_width"
-        android:layout_height="@dimen/mobile_image_height"/>
+        android:layout_height="@dimen/mobile_image_height"
+        android:contentDescription="@string/show_mobile_image" />
 </LinearLayout>

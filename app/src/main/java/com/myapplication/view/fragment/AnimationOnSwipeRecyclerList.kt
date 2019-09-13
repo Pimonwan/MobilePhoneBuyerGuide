@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.myapplication.DataString
 import com.myapplication.view.adapter.FavoriteListAdapter
 import com.myapplication.view.viewInterface.ItemListClick
 
@@ -17,7 +18,7 @@ class AnimationOnSwipeRecyclerList(deleteItemIcon: Drawable, private val adapter
     private var deleteIcon = deleteItemIcon
 
     fun setAnimationOnSwipeRecyclerList(){
-        swipeBackground = ColorDrawable(Color.parseColor("#FF0000"))
+        swipeBackground = ColorDrawable(Color.parseColor(DataString.redColorCode))
         itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             override fun onMove(
                 recyclerView: RecyclerView,
