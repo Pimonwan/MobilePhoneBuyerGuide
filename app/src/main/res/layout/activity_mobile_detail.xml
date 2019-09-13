@@ -41,7 +41,7 @@
                 android:textSize="@dimen/titleText"
                 android:textStyle="bold"
                 android:id="@+id/mobile_name"
-                android:text="name"
+                tools:text="name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView

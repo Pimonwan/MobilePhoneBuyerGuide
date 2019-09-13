@@ -31,6 +31,10 @@ class TabMobileListFragment : BaseFragment(), MobileListView {
     }
     private val mListenerFavClickFavoriteButton: ItemListClick.OnClickFavoriteButton =
         object : ItemListClick.OnClickFavoriteButton {
+            override fun deleteDataFromFavoriteList(detail: MobileDetail) {
+
+            }
+
             override fun addDataToFavoriteList(detail: MobileDetail) {
                 addMobileDetailToFavoriteList(detail)
             }
@@ -44,6 +48,10 @@ class TabMobileListFragment : BaseFragment(), MobileListView {
 
     fun addMobileDetailToFavoriteList(data: MobileDetail) {
         favListener?.addDataToFavoriteList(data)
+    }
+
+    fun unFavoriteMobileDetailList(data : MobileDetail){
+        adapter.unFavItem(data)
     }
 
     fun setDataArray(list: List<MobileDetail>) {

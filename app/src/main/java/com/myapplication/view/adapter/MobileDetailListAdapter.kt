@@ -24,6 +24,11 @@ class MobileDetailListAdapter(
         return this.mDataArray
     }
 
+    fun unFavItem(data: MobileDetail){
+        data.isFavorite = !data.isFavorite
+        this.notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, index: Int): MobileDetailListHolder {
         val layout =
             LayoutInflater.from(parent.context).inflate(R.layout.mobile_item_list, parent, false)

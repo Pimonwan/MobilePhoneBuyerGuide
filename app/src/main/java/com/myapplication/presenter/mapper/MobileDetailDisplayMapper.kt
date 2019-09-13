@@ -7,18 +7,19 @@ class MobileDetailDisplayMapper {
 
     fun mapperToDisplayModel(list: List<MobileDetailResponse>): List<MobileDetail> {
         val mobileDetailDisplay = arrayListOf<MobileDetail>()
-        for (item in list) {
-            val mobile = MobileDetail(
-                item.brand,
-                item.description,
-                item.id.toString(),
-                item.name,
-                "Price: \$${item.price}",
-                "Rating: ${item.rating}",
-                item.thumbImageURL
-            )
-            mobileDetailDisplay.add(mobile)
+        return list.mapTo(mobileDetailDisplay){
+            transformResponseToDisplay(it)
         }
-        return mobileDetailDisplay
+    }
+
+    fun transformResponseToDisplay(item: MobileDetailResponse): MobileDetail{
+        return MobileDetail(
+            item.brand,
+            item.description,
+            item.id.toString(),
+            item.name,
+            "Price: \$${item.price}",
+            "Rating: ${item.rating}",
+            item.thumbImageURL)
     }
 }

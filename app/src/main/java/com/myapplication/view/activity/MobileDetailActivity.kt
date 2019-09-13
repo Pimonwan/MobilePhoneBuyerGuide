@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.myapplication.R
-import com.myapplication.data.model.MobileImageResponse
 import com.myapplication.presenter.MobileDetailActivityPresenter
 import com.myapplication.presenter.displaymodel.MobileDetail
+import com.myapplication.presenter.displaymodel.MobileImageUrl
 import com.myapplication.presenter.viewInterface.MobileDetailView
 import com.myapplication.view.adapter.MobileImagesListAdapter
 import kotlinx.android.synthetic.main.activity_mobile_detail.*
@@ -47,7 +47,7 @@ class MobileDetailActivity : BaseActivity(), MobileDetailView {
         setView()
     }
 
-    override fun setImagesToRecycleView(mobileImages: List<MobileImageResponse>) {
+    override fun setImagesToRecycleView(mobileImages: List<MobileImageUrl>) {
         adapter.addDataArray(mobileImages)
     }
 

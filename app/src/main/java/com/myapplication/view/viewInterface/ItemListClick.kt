@@ -7,5 +7,6 @@ interface ItemListClick {
 
     interface OnClickFavoriteButton {
         fun addDataToFavoriteList(detail: MobileDetail)
+        fun deleteDataFromFavoriteList(detail: MobileDetail)
     }
 }

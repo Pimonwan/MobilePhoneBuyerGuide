@@ -81,6 +81,13 @@ class MainActivity : BaseActivity(), MainActivityView, ItemListClick.OnClickFavo
         return data
     }
 
+    private fun unFavoriteMobileList(data : MobileDetail){
+        val fragment = sectionsPagerAdapter.getItem(0)
+        if (fragment is TabMobileListFragment) {
+            fragment.unFavoriteMobileDetailList(data)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -107,6 +114,10 @@ class MainActivity : BaseActivity(), MainActivityView, ItemListClick.OnClickFavo
         if (fragment is TabFavoriteMobileFragment) {
             fragment.manageFavoriteList(detail)
         }
+    }
+
+    override fun deleteDataFromFavoriteList(detail: MobileDetail) {
+        unFavoriteMobileList(detail)
     }
 
     override fun showMobileDetailAfterSort(list: List<MobileDetail>) {

@@ -22,6 +22,11 @@ class FavoriteListAdapter @Inject constructor() : RecyclerView.Adapter<FavoriteL
         this.notifyDataSetChanged()
     }
 
+    fun removeItemFromIndex(viewHolder: RecyclerView.ViewHolder) {
+        mDataArray.removeAt(viewHolder.adapterPosition)
+        this.notifyDataSetChanged()
+    }
+
     fun getMobileList(): List<MobileDetail> {
         return this.mDataArray
     }

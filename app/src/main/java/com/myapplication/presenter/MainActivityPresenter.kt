@@ -18,7 +18,7 @@ class MainActivityPresenter @Inject constructor() {
     }
 
     fun sortFavoriteList(option: String, data: List<MobileDetail>) {
-        if (!data.isEmpty()) {
+        if (data.isNotEmpty()) {
             val sortedList = sortMobileList(option, data)
             view.showFavoriteListAfterSort(sortedList)
         }
