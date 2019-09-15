@@ -11,4 +11,7 @@
     <string name="choice_low_to_high">Price low to high</string>
     <string name="choice_high_to_low">Price high to low</string>
     <string name="choice_rating">Rating 5 – 1</string>
+    <string name="radio_choice_0">2131230823</string>
+    <string name="radio_choice_1">2131230822</string>
+    <string name="radio_choice_2">2131230824</string>
 </resources>

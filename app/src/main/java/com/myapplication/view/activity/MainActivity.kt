@@ -16,11 +16,12 @@ import com.myapplication.view.fragment.FragmentDialog
 import com.myapplication.view.fragment.TabFavoriteMobileFragment
 import com.myapplication.view.fragment.TabMobileListFragment
 import com.myapplication.view.viewInterface.ItemListClick
+import com.myapplication.view.viewInterface.SetDataFromDevice
 import com.myapplication.view.viewInterface.SortButtonInterface
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainActivity : BaseActivity(), MainActivityView, ItemListClick.OnClickFavoriteButton {
+class MainActivity : BaseActivity(), MainActivityView, ItemListClick.OnClickFavoriteButton, SetDataFromDevice {
 
     @Inject
     lateinit var presenter: MainActivityPresenter
@@ -31,25 +32,28 @@ class MainActivity : BaseActivity(), MainActivityView, ItemListClick.OnClickFavo
     private lateinit var sectionsPagerAdapter: SectionsPagerAdapter
     private val mSortListener: SortButtonInterface = object : SortButtonInterface {
         override fun sortData(sortType: String) {
+            presenter.setSortOptionInDevice(sortType)
             presenter.sortMobileDetailList(sortType, getMobileDetailList())
             presenter.sortFavoriteList(sortType, getFavoriteList())
         }
     }
 
     private fun initView() {
-        presenter.setView(this)
+        presenter.setView(this, this)
         sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
         view_pager.adapter = sectionsPagerAdapter
-
         tabs.setupWithViewPager(view_pager)
-
         for (i in 0 until tabs.tabCount) {
             val tab: TabLayout.Tab? = tabs.getTabAt(i)
             tab!!.customView = sectionsPagerAdapter.getTabView(i)
         }
-
         toolbar.title = getString(R.string.app_name)
         setSupportActionBar(toolbar)
+    }
+
+    private fun getSortOptionFromDevice() : String{
+        val option = presenter.getSortOptionFromDevice()
+        return option
     }
 
     private fun showFragmentChoices() {
@@ -86,6 +90,7 @@ class MainActivity : BaseActivity(), MainActivityView, ItemListClick.OnClickFavo
         if (fragment is TabMobileListFragment) {
             fragment.unFavoriteMobileDetailList(data)
         }
+        presenter.removeFavoriteMobileFromListInDevice(data.id)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -114,6 +119,9 @@ class MainActivity : BaseActivity(), MainActivityView, ItemListClick.OnClickFavo
         if (fragment is TabFavoriteMobileFragment) {
             fragment.manageFavoriteList(detail)
         }
+        val option = getSortOptionFromDevice()
+        presenter.sortFavoriteList(option, getFavoriteList())
+        presenter.addFavoriteMobileInListInDevice(detail.id)
     }
 
     override fun deleteDataFromFavoriteList(detail: MobileDetail) {
@@ -133,4 +141,23 @@ class MainActivity : BaseActivity(), MainActivityView, ItemListClick.OnClickFavo
             favoriteMobileFragment.setDataArray(list)
         }
     }
+
+    override fun showFavoriteFromDevice(mobileList: List<MobileDetail>, favList: List<MobileDetail>) {
+        val mobileDetailFragment = sectionsPagerAdapter.getItem(0)
+        if (mobileDetailFragment is TabMobileListFragment) {
+            mobileDetailFragment.setDataArray(mobileList)
+        }
+        val favoriteMobileFragment = sectionsPagerAdapter.getItem(1)
+        if (favoriteMobileFragment is TabFavoriteMobileFragment) {
+            favoriteMobileFragment.setDataArray(favList)
+        }
+    }
+
+    override fun setFavoriteListAndSortFromDevice() {
+        val option = getSortOptionFromDevice()
+        presenter.getFavoriteToSetView(getMobileDetailList())
+        presenter.sortMobileDetailList(option, getMobileDetailList())
+        presenter.sortFavoriteList(option, getFavoriteList())
+    }
+
 }

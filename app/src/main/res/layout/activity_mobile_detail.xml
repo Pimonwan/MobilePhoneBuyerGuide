@@ -51,11 +51,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
-        <TextView
-            android:paddingTop="@dimen/padding_20"
-            android:id="@+id/mobile_description"
-            tools:text="description"
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="@dimen/subTitleText"
+                android:id="@+id/mobile_price"
+                tools:text="price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/mobile_rate"
+                tools:text="rate"
+                android:textStyle="normal"
+                android:textSize="@dimen/subTitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:paddingTop="@dimen/padding_20"
+                android:id="@+id/mobile_description"
+                tools:text="description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </ScrollView>
     </LinearLayout>
 </LinearLayout>

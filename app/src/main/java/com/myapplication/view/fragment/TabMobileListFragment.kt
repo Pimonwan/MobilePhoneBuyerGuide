@@ -15,6 +15,7 @@ import com.myapplication.view.activity.MainActivity
 import com.myapplication.view.activity.MobileDetailActivity
 import com.myapplication.view.adapter.MobileDetailListAdapter
 import com.myapplication.view.viewInterface.ItemListClick
+import com.myapplication.view.viewInterface.SetDataFromDevice
 import kotlinx.android.synthetic.main.fragment_tab_mobile_list.*
 import javax.inject.Inject
 
@@ -24,6 +25,9 @@ class TabMobileListFragment : BaseFragment(), MobileListView {
     lateinit var presenter: TabMobileListPresenter
     private lateinit var adapter: MobileDetailListAdapter
     private var favListener: ItemListClick.OnClickFavoriteButton? = null
+
+    private var listener: SetDataFromDevice? = null
+
     private val mListenerItemClick: ItemListClick = object : ItemListClick {
         override fun navigateToMobileDetailActivity(detail: MobileDetail) {
             navigateToMobileDetail(detail)
@@ -80,6 +84,7 @@ class TabMobileListFragment : BaseFragment(), MobileListView {
         super.onActivityCreated(savedInstanceState)
         if (activity is MainActivity) {
             favListener = activity as ItemListClick.OnClickFavoriteButton
+            listener = activity as SetDataFromDevice
         }
     }
 
@@ -99,6 +104,7 @@ class TabMobileListFragment : BaseFragment(), MobileListView {
 
     override fun showMobileList(list: List<MobileDetail>) {
         adapter.addDataArray(list)
+        listener?.setFavoriteListAndSortFromDevice()
     }
 
     override fun showErrorMessageToast(throwable: Throwable) {

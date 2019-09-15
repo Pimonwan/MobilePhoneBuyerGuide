@@ -38,6 +38,8 @@ class MobileDetailActivity : BaseActivity(), MobileDetailView {
         mobile_name.text = mobileDetail.name
         mobile_brand.text = mobileDetail.brand
         mobile_description.text = mobileDetail.description
+        mobile_price.text = mobileDetail.price
+        mobile_rate.text = mobileDetail.rating
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
