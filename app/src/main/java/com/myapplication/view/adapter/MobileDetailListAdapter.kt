@@ -24,7 +24,7 @@ class MobileDetailListAdapter(
         return this.mDataArray
     }
 
-    fun unFavItem(data: MobileDetail){
+    fun unFavItem(data: MobileDetail) {
         data.isFavorite = !data.isFavorite
         this.notifyDataSetChanged()
     }

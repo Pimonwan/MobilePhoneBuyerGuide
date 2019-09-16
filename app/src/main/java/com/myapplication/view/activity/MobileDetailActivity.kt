@@ -16,8 +16,7 @@ class MobileDetailActivity : BaseActivity(), MobileDetailView {
 
     @Inject
     lateinit var presenter: MobileDetailActivityPresenter
-    @Inject
-    lateinit var adapter: MobileImagesListAdapter
+    private lateinit var adapter: MobileImagesListAdapter
     private lateinit var mobileDetail: MobileDetail
 
     private fun initView() {

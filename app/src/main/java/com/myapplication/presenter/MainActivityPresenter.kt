@@ -37,7 +37,7 @@ class MainActivityPresenter @Inject constructor() {
         view.showFavoriteFromDevice(mobileList, favList)
     }
 
-    fun getFavoriteListFromDevice() : MutableSet<String> {
+    private fun getFavoriteListFromDevice() : MutableSet<String> {
         return usecase.getFavoriteList()
     }
 

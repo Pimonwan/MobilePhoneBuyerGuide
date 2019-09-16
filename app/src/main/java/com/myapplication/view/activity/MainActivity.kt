@@ -53,8 +53,7 @@ class MainActivity : BaseActivity(), MainActivityView, ItemListClick.OnClickFavo
     }
 
     private fun getSortOptionFromDevice() : String{
-        val option = presenter.getSortOptionFromDevice()
-        return option
+        return presenter.getSortOptionFromDevice()
     }
 
     private fun showFragmentChoices() {
@@ -99,8 +98,6 @@ class MainActivity : BaseActivity(), MainActivityView, ItemListClick.OnClickFavo
         setContentView(R.layout.activity_main)
         initView()
     }
-
-
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val mMenuInflater: MenuInflater = menuInflater

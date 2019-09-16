@@ -11,7 +11,7 @@ class MobileImageUrlMapper {
         }
     }
 
-    fun transformResponseToDisplay(item: MobileImageResponse) : MobileImageUrl {
+    private fun transformResponseToDisplay(item: MobileImageResponse) : MobileImageUrl {
         var url = item.url
         if (!url.startsWith("http")) {
             url = "http://" + item.url

@@ -54,7 +54,7 @@ class TabMobileListFragment : BaseFragment(), MobileListView {
         favListener?.addDataToFavoriteList(data)
     }
 
-    fun unFavoriteMobileDetailList(data : MobileDetail){
+    fun unFavoriteMobileDetailList(data: MobileDetail) {
         adapter.unFavItem(data)
     }
 

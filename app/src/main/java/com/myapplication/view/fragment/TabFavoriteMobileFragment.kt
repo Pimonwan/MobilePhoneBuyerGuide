@@ -15,23 +15,23 @@ import com.myapplication.view.viewInterface.ItemListClick
 import kotlinx.android.synthetic.main.fragment_tab_favorite_mobile.*
 import javax.inject.Inject
 
-class TabFavoriteMobileFragment  : BaseFragment() {
+class TabFavoriteMobileFragment : BaseFragment() {
 
     @Inject
     lateinit var adapter: FavoriteListAdapter
     private lateinit var animation: AnimationOnSwipeRecyclerList
-    private lateinit var deleteIcon : Drawable
+    private lateinit var deleteIcon: Drawable
     private var unFavListener: ItemListClick.OnClickFavoriteButton? = null
 
     fun manageFavoriteList(mobileDetail: MobileDetail) {
-        if (mobileDetail.isFavorite){
+        if (mobileDetail.isFavorite) {
             adapter.addItemToData(mobileDetail)
-        }else{
+        } else {
             adapter.removeItemFromData(mobileDetail)
         }
     }
 
-    fun getFavoriteList() : List<MobileDetail> {
+    fun getFavoriteList(): List<MobileDetail> {
         return adapter.getMobileList()
     }
 
@@ -51,7 +51,8 @@ class TabFavoriteMobileFragment  : BaseFragment() {
 
     private fun setAnimationOnSwipeRecyclerList() {
         deleteIcon = ContextCompat.getDrawable(context!!, R.drawable.ic_delete_white_24dp)!!
-        animation = AnimationOnSwipeRecyclerList(deleteIcon, adapter, unFavListener, recyclerFavoriteView)
+        animation =
+            AnimationOnSwipeRecyclerList(deleteIcon, adapter, unFavListener, recyclerFavoriteView)
         animation.setAnimationOnSwipeRecyclerList()
     }
 

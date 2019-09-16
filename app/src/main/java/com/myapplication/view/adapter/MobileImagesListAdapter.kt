@@ -4,12 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.myapplication.R
-import com.myapplication.data.model.MobileImageResponse
 import com.myapplication.presenter.displaymodel.MobileImageUrl
 import com.myapplication.view.adapter.viewholder.MobileImagesListHolder
-import javax.inject.Inject
 
-class MobileImagesListAdapter @Inject constructor(): RecyclerView.Adapter<MobileImagesListHolder>() {
+class MobileImagesListAdapter :
+    RecyclerView.Adapter<MobileImagesListHolder>() {
 
     private var mDataArray: List<MobileImageUrl> = listOf()
 

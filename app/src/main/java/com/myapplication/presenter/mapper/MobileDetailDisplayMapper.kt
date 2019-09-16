@@ -12,7 +12,7 @@ class MobileDetailDisplayMapper {
         }
     }
 
-    fun transformResponseToDisplay(item: MobileDetailResponse): MobileDetail{
+    private fun transformResponseToDisplay(item: MobileDetailResponse): MobileDetail{
         return MobileDetail(
             item.brand,
             item.description,
