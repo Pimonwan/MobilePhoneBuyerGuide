@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.tabs.TabLayout
@@ -156,6 +157,8 @@ class MainActivity : BaseActivity(), MainActivityView, ItemListClick.OnClickFavo
     }
 
     override fun setFavoriteListAndSortFromDevice() {
+        val visibility = if (progressBar.visibility == View.GONE) View.VISIBLE else View.GONE
+        progressBar.visibility = visibility
         val option = getSortOptionFromDevice()
         presenter.getFavoriteToSetView(getMobileDetailList())
         presenter.sortMobileDetailList(option, getMobileDetailList())
