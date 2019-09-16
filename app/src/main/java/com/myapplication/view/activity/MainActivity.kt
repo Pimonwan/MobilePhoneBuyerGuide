@@ -85,14 +85,6 @@ class MainActivity : BaseActivity(), MainActivityView, ItemListClick.OnClickFavo
         return data
     }
 
-    private fun unFavoriteMobileList(data : MobileDetail){
-        val fragment = sectionsPagerAdapter.getItem(0)
-        if (fragment is TabMobileListFragment) {
-            fragment.unFavoriteMobileDetailList(data)
-        }
-        presenter.removeFavoriteMobileFromListInDevice(data.id)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -114,22 +106,33 @@ class MainActivity : BaseActivity(), MainActivityView, ItemListClick.OnClickFavo
         return super.onOptionsItemSelected(item)
     }
 
-    override fun addDataToFavoriteList(detail: MobileDetail) {
+    override fun manageDataToFavoriteList(detail: MobileDetail) {
         val fragment = sectionsPagerAdapter.getItem(1)
         if (fragment is TabFavoriteMobileFragment) {
             fragment.manageFavoriteList(detail)
         }
         val option = getSortOptionFromDevice()
         presenter.sortFavoriteList(option, getFavoriteList())
-        presenter.addFavoriteMobileInListInDevice(detail.id)
     }
 
     override fun deleteDataFromFavoriteList(detail: MobileDetail) {
-        val fragment = sectionsPagerAdapter.getItem(1)
-        if (fragment is TabFavoriteMobileFragment) {
-            fragment.manageFavoriteList(detail)
+        val mobileListfragment = sectionsPagerAdapter.getItem(0)
+        if (mobileListfragment is TabMobileListFragment) {
+            mobileListfragment.unFavoriteItem(detail)
+        }
+        val favoriteFragment = sectionsPagerAdapter.getItem(1)
+        if (favoriteFragment is TabFavoriteMobileFragment) {
+            favoriteFragment.manageFavoriteList(detail)
         }
         presenter.removeFavoriteMobileFromListInDevice(detail.id)
+    }
+
+    override fun addFavoriteDataToDevice(id: String) {
+        presenter.addFavoriteMobileInListInDevice(id)
+    }
+
+    override fun removeFavoriteFromDevice(id: String) {
+        presenter.removeFavoriteMobileFromListInDevice(id)
     }
 
     override fun showMobileDetailAfterSort(list: List<MobileDetail>) {
@@ -147,14 +150,8 @@ class MainActivity : BaseActivity(), MainActivityView, ItemListClick.OnClickFavo
     }
 
     override fun showFavoriteFromDevice(mobileList: List<MobileDetail>, favList: List<MobileDetail>) {
-        val mobileDetailFragment = sectionsPagerAdapter.getItem(0)
-        if (mobileDetailFragment is TabMobileListFragment) {
-            mobileDetailFragment.setDataArray(mobileList)
-        }
-        val favoriteMobileFragment = sectionsPagerAdapter.getItem(1)
-        if (favoriteMobileFragment is TabFavoriteMobileFragment) {
-            favoriteMobileFragment.setDataArray(favList)
-        }
+        this.showMobileDetailAfterSort(mobileList)
+        this.showFavoriteListAfterSort(favList)
     }
 
     override fun setFavoriteListAndSortFromDevice() {
@@ -165,5 +162,4 @@ class MainActivity : BaseActivity(), MainActivityView, ItemListClick.OnClickFavo
         presenter.sortMobileDetailList(option, getMobileDetailList())
         presenter.sortFavoriteList(option, getFavoriteList())
     }
-
 }

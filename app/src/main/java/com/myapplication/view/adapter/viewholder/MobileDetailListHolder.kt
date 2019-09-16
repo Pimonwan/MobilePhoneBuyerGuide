@@ -37,16 +37,14 @@ class MobileDetailListHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
         }
 
         favButt.setOnClickListener {
-            item.isFavorite = !item.isFavorite
-            if (!item.isFavorite) {
-                favListener.deleteDataFromFavoriteList(item)
+            if (item.isFavorite) {
                 favButt.setBackgroundResource(R.drawable.ic_favorite_border_black)
 
             } else {
-                favListener.addDataToFavoriteList(item)
                 favButt.setBackgroundResource(R.drawable.ic_favorite_black)
             }
             item.isFavorite = !item.isFavorite
+            favListener.manageDataToFavoriteList(item)
         }
     }
 }

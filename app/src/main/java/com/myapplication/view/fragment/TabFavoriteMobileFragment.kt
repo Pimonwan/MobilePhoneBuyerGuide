@@ -25,8 +25,10 @@ class TabFavoriteMobileFragment : BaseFragment() {
 
     fun manageFavoriteList(mobileDetail: MobileDetail) {
         if (mobileDetail.isFavorite) {
+            unFavListener?.addFavoriteDataToDevice(mobileDetail.id)
             adapter.addItemToData(mobileDetail)
         } else {
+            unFavListener?.removeFavoriteFromDevice(mobileDetail.id)
             adapter.removeItemFromData(mobileDetail)
         }
     }

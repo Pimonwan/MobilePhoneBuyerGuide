@@ -10,19 +10,19 @@ import javax.inject.Inject
 class MainActivityPresenter @Inject constructor() {
 
     private lateinit var view: MainActivityView
-    private lateinit var usecase : MobileDataDeviceUseCase
+    private lateinit var localUsecase: MobileDataDeviceUseCase
 
     fun setView(view: MainActivityView, context: Context) {
         this.view = view
-        usecase = MobileDataDeviceUseCase(context)
+        localUsecase = MobileDataDeviceUseCase(context)
     }
 
-    fun getSortOptionFromDevice() : String {
-        return usecase.getSortOption()
+    fun getSortOptionFromDevice(): String {
+        return localUsecase.getSortOption()
     }
 
     fun setSortOptionInDevice(option: String) {
-        usecase.setSortOption(option)
+        localUsecase.setSortOption(option)
     }
 
     fun getFavoriteToSetView(mobileList: List<MobileDetail>) {
@@ -37,8 +37,8 @@ class MainActivityPresenter @Inject constructor() {
         view.showFavoriteFromDevice(mobileList, favList)
     }
 
-    private fun getFavoriteListFromDevice() : MutableSet<String> {
-        return usecase.getFavoriteList()
+    private fun getFavoriteListFromDevice(): MutableSet<String> {
+        return localUsecase.getFavoriteList()
     }
 
     fun addFavoriteMobileInListInDevice(id: String) {
@@ -49,7 +49,7 @@ class MainActivityPresenter @Inject constructor() {
         }
         if (!newFavList.contains(id)) {
             newFavList.add(id)
-            usecase.setFavoriteList(newFavList)
+            localUsecase.setFavoriteList(newFavList)
         }
     }
 
@@ -61,7 +61,7 @@ class MainActivityPresenter @Inject constructor() {
         }
         if (newFavList.contains(id)) {
             newFavList.remove(id)
-            usecase.setFavoriteList(newFavList)
+            localUsecase.setFavoriteList(newFavList)
         }
     }
 

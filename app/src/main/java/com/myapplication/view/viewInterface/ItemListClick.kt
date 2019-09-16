@@ -6,7 +6,9 @@ interface ItemListClick {
     fun navigateToMobileDetailActivity(detail: MobileDetail)
 
     interface OnClickFavoriteButton {
-        fun addDataToFavoriteList(detail: MobileDetail)
+        fun manageDataToFavoriteList(detail: MobileDetail)
         fun deleteDataFromFavoriteList(detail: MobileDetail)
+        fun addFavoriteDataToDevice(id: String)
+        fun removeFavoriteFromDevice(id: String)
     }
 }

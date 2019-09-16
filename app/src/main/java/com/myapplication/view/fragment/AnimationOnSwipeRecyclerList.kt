@@ -34,9 +34,9 @@ class AnimationOnSwipeRecyclerList(
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, position: Int) {
-                val data = adapter.getMobileList()[viewHolder.adapterPosition]
+                val index = viewHolder.adapterPosition
+                val data = adapter.getMobileList()[index]
                 listener?.deleteDataFromFavoriteList(data)
-                adapter.removeItemFromIndex(viewHolder)
             }
 
             override fun onChildDraw(

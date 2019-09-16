@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.myapplication.DataString
 import com.myapplication.R
 import com.myapplication.view.fragment.TabFavoriteMobileFragment
 import com.myapplication.view.fragment.TabMobileListFragment
@@ -19,7 +20,7 @@ class SectionsPagerAdapter @Inject constructor(private val context: Context, fm:
     private var tabMobileList = TabMobileListFragment()
     private var tabFavoriteList = TabFavoriteMobileFragment()
     private val pages: Int = 2
-    private val tabTitle = arrayOf("MOBILE LIST", "FAVORITE LIST")
+    private val tabTitle = arrayOf(DataString.tab1NameString, DataString.tab2NameString)
 
     override fun getItem(position: Int): Fragment {
         return if (position == 0) {
