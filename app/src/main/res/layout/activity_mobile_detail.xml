@@ -18,6 +18,12 @@
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:titleTextColor="@android:color/white" />
     </com.google.android.material.appbar.AppBarLayout>
+    <ProgressBar
+        android:layout_gravity="center"
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         tools:listitem="@layout/mobile_image_item_list"

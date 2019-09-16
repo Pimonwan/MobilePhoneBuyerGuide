@@ -1,6 +1,7 @@
 package com.myapplication.view.activity
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.myapplication.R
@@ -49,6 +50,8 @@ class MobileDetailActivity : BaseActivity(), MobileDetailView {
     }
 
     override fun setImagesToRecycleView(mobileImages: List<MobileImageUrl>) {
+        val visibility = if (progressBar.visibility == View.GONE) View.VISIBLE else View.GONE
+        progressBar.visibility = visibility
         adapter.addDataArray(mobileImages)
     }
 
