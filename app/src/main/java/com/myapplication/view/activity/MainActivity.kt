@@ -58,7 +58,7 @@ class MainActivity : BaseActivity(), MainActivityView, ItemListClick.OnClickFavo
     }
 
     private fun showFragmentChoices() {
-        val dialogFragment = FragmentDialog(mSortListener)
+        val dialogFragment = FragmentDialog(getSortOptionFromDevice(), mSortListener)
         dialogFragment.arguments = bundle
         fragmentTransaction = supportFragmentManager.beginTransaction()
         if (priorInstance != null) {

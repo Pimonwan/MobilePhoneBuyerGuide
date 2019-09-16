@@ -11,11 +11,16 @@ import com.myapplication.R
 import com.myapplication.view.viewInterface.SortButtonInterface
 import kotlinx.android.synthetic.main.fragment_fragment_dialog.*
 
-class FragmentDialog(listener: SortButtonInterface) : DialogFragment() {
+class FragmentDialog(private val option: String, listener: SortButtonInterface) : DialogFragment() {
 
     private val mRadioListener: SortButtonInterface = listener
 
     private fun setRadioButton() {
+        when (option) {
+            DataString.optionPriceLowToHigh -> sortChoicesButton.check(R.id.choiceLowToHigh)
+            DataString.optionPriceHighToLow -> sortChoicesButton.check(R.id.choiceHighToLow)
+            else -> sortChoicesButton.check(R.id.choiceRate)
+        }
         sortChoicesButton.setOnCheckedChangeListener { _, checkedId ->
             val radioButton = view!!.findViewById<RadioButton>(checkedId)
             when {
