@@ -125,7 +125,11 @@ class MainActivity : BaseActivity(), MainActivityView, ItemListClick.OnClickFavo
     }
 
     override fun deleteDataFromFavoriteList(detail: MobileDetail) {
-        unFavoriteMobileList(detail)
+        val fragment = sectionsPagerAdapter.getItem(1)
+        if (fragment is TabFavoriteMobileFragment) {
+            fragment.manageFavoriteList(detail)
+        }
+        presenter.removeFavoriteMobileFromListInDevice(detail.id)
     }
 
     override fun showMobileDetailAfterSort(list: List<MobileDetail>) {
