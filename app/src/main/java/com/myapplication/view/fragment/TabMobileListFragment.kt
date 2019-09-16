@@ -103,6 +103,8 @@ class TabMobileListFragment : BaseFragment(), MobileListView {
     }
 
     override fun showMobileList(list: List<MobileDetail>) {
+        val visibility = if (progressBar.visibility == View.GONE) View.VISIBLE else View.GONE
+        progressBar.visibility = visibility
         adapter.addDataArray(list)
         listener?.setFavoriteListAndSortFromDevice()
     }

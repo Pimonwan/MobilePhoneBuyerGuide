@@ -99,6 +99,8 @@ class MainActivity : BaseActivity(), MainActivityView, ItemListClick.OnClickFavo
         initView()
     }
 
+
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val mMenuInflater: MenuInflater = menuInflater
         mMenuInflater.inflate(R.menu.toolbar, menu)
